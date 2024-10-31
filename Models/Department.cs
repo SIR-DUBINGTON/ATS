@@ -6,17 +6,26 @@ using System.Threading.Tasks;
 
 namespace ATS.Models
 {
+    public enum DepartmentName  
+    {
+        Finance,
+        HumanResources,
+        Operations,
+        Sales,
+        InformationTechnology
+    }
+
     public class Department
     {
-        public int id { get; set; }
-        public string name { get; set; }
+        public int Id { get; set; }
+        public DepartmentName Name { get; set; }  
         public List<User> Users { get; set; }
 
-        public Department(int id, string name, List<User> Users)
+        public Department(int id, DepartmentName name, List<User> users) 
         {
-            this.id = id;
-            this.name = name;
-            this.Users = Users;
+            Id = id;
+            Name = name;
+            Users = users;
         }
     }
 }

@@ -24,7 +24,7 @@ namespace ATS.DataAccess
                 server = "localhost";
                 database = "ats";
                 uid = "root";
-                password = "root"; // Consider using a more secure way to store these
+                password = "root"; // Plain text for development and testing purposes. Will be using a more secure way to store these
             }
 
             public MySqlConnection GetConnection()
