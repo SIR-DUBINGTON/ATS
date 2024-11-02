@@ -3,65 +3,60 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 
 namespace ATS.DataAccess
 {
     public class DatabaseConHub
     {
-            private string server;
-            private string database;
-            private string uid;
-            private string password;
+        
+            private readonly string connectionString;
 
             public DatabaseConHub()
             {
-                Initialize();
-            }
-
-            private void Initialize()
-            {
-                server = "localhost";
-                database = "ats";
-                uid = "root";
-                password = "root"; // Plain text for development and testing purposes. Will be using a more secure way to store these
+                connectionString = "Server=localhost;Database=ats;User ID=root;Password='';";
             }
 
             public MySqlConnection GetConnection()
             {
-                string connectionString = $"SERVER={server};DATABASE={database};UID={uid};PASSWORD={password};";
                 return new MySqlConnection(connectionString);
             }
 
-            public bool ExecuteQuery(string query)
+            public async Task<bool> ExecuteQueryAsync(string query)
             {
-                using (MySqlConnection connection = GetConnection())
+                using (var connection = GetConnection())
                 {
                     try
                     {
-                        connection.Open();
-                        using (MySqlCommand cmd = new MySqlCommand(query, connection))
+                        await connection.OpenAsync();
+                        using (var cmd = new MySqlCommand(query, connection))
                         {
-                            cmd.ExecuteNonQuery();
-                            return true;
+                            await cmd.ExecuteNonQueryAsync();
                         }
+                        return true;
                     }
                     catch (MySqlException ex)
                     {
-                        switch (ex.Number)
-                        {
-                            case 0:
-                                Console.WriteLine("Cannot connect to server. Contact administrator.");
-                                break;
-                            case 1045:
-                                Console.WriteLine("Invalid username/password, please try again.");
-                                break;
-                            default:
-                                Console.WriteLine(ex.Message);
-                                break;
-                        }
+                        Console.WriteLine($"Database error: {ex.Message}");
                         return false;
                     }
+                }
+            }
+
+            public async Task<MySqlDataReader> ExecuteReaderAsync(string query)
+            {
+                var connection = GetConnection();
+                try
+                {
+                    await connection.OpenAsync();
+                    var cmd = new MySqlCommand(query, connection);
+                    return await cmd.ExecuteReaderAsync(System.Data.CommandBehavior.CloseConnection);
+                }
+                catch (MySqlException ex)
+                {
+                    Console.WriteLine($"Database error: {ex.Message}");
+                    connection.Close();
+                    throw;
                 }
             }
         }

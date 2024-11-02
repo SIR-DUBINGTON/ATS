@@ -14,7 +14,8 @@ namespace ATS.Models
         public string manufacturer { get; set; }
         public string type { get; set; }
         public string ip { get; set; }
-
+        public DateTime purchaseDate { get; set; }
+        public string textNotes { get; set; }
 
         public Asset(int id, string name, string model, string manufacturer, string type, string ip)
         {
