@@ -1,5 +1,5 @@
 ﻿using ATS.DataAccess;
-using MySql.Data.MySqlClient;
+using MySqlConnector;
 using System;
 using System.Collections.Generic;
 using System.IO;
@@ -16,51 +16,84 @@ using Windows.UI.Xaml.Data;
 using Windows.UI.Xaml.Input;
 using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
+using ATS.ViewModels;
 
 
 namespace ATS.Views
 {
     public sealed partial class RegistrationPage : Page
     {
-        private readonly DatabaseConHub _dbConHub = new DatabaseConHub();
+        private readonly DepartmentInteractionModule _departmentInteractionModule;
+        private DatabaseConHub dbConHub = new DatabaseConHub();
 
         public RegistrationPage()
         {
-            this.InitializeComponent();
+            InitializeComponent();
+            _departmentInteractionModule = new DepartmentInteractionModule(new DatabaseConHub());
+            this.Loaded += Page_Loaded;
         }
+        private void Page_Loaded(object sender, RoutedEventArgs e)
+        {
+            var departments = _departmentInteractionModule.GetAllDepartments();
+
+            foreach (var department in departments)
+            {
+                cmbDepartment.Items.Add(department.GetDepartmentNameString());
+            }
+        }
+
 
         private async void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            string username = txtUsername.Text;
-            string passwordHash = pwdPassword.Password; 
-            string firstName = txtFirstName.Text;
-            string lastName = txtLastName.Text;
-            string email = txtEmailAddress.Text;
-            string department = cmbDepartment.SelectedItem.ToString();
-            string role = txtRole.Text;
+            string selectedDepartment = cmbDepartment.SelectedItem.ToString();
+            int departmentId = _departmentInteractionModule.GetDepartmentID(selectedDepartment);
 
-            await RegisterUserAsync(username, passwordHash, firstName, lastName, email, department, role);
+            if (departmentId <= 0)
+            {
+                var dialog = new MessageDialog("Selected department does not exist.");
+                await dialog.ShowAsync();
+                return;
+            }
+
+            await RegisterUserAsync(
+                txtUsername.Text,
+                pwdPassword.Password,
+                txtFirstName.Text,
+                txtLastName.Text,
+                txtEmailAddress.Text,
+                selectedDepartment,
+                txtRole.Text
+            );
         }
+
         private async Task RegisterUserAsync(string username, string passwordHash, string firstName, string lastName, string email, string department, string role)
         {
-            string query = $"INSERT INTO Users (username, passwordHash, firstName, lastName, emailAddress, department, urole) " +
-                           $"VALUES ('{username}', '{passwordHash}', '{firstName}', '{lastName}', '{email}', '{department}', '{role}');";
+            int departmentID = _departmentInteractionModule.GetDepartmentID(department);
 
-            try
+            string query = "INSERT INTO Users (username, passwordHash, firstName, lastName, emailAddress, DepartmentID, urole) " +
+                           "VALUES (@username, @passwordHash, @firstName, @lastName, @Email, @departmentID, @urole)";
+
+            using (MySqlConnection connection = dbConHub.GetConnection())
             {
-                var success = await _dbConHub.ExecuteQueryAsync(query);
-                if (success)
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@username", username);
+                cmd.Parameters.AddWithValue("@passwordHash", passwordHash);
+                cmd.Parameters.AddWithValue("@firstName", firstName);
+                cmd.Parameters.AddWithValue("@lastName", lastName);
+                cmd.Parameters.AddWithValue("@Email", email);
+                cmd.Parameters.AddWithValue("@departmentID", departmentID);
+                cmd.Parameters.AddWithValue("@urole", role);
+
+                try
                 {
-                    await new MessageDialog("Registration successful!").ShowAsync();
+                    await connection.OpenAsync();
+                    await cmd.ExecuteNonQueryAsync();
+                    Console.WriteLine("User registered successfully.");
                 }
-                else
+                catch (MySqlException ex)
                 {
-                    await new MessageDialog("Registration failed. Please try again.").ShowAsync();
+                    Console.WriteLine("An error occurred: " + ex.Message);
                 }
-            }
-            catch (Exception ex)
-            {
-                await new MessageDialog($"Error: {ex.Message}").ShowAsync();
             }
         }
     }

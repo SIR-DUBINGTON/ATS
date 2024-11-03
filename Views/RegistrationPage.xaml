@@ -16,13 +16,7 @@
             <TextBox x:Name="txtFirstName" PlaceholderText="First Name" Margin="0,0,0,10"/>
             <TextBox x:Name="txtLastName" PlaceholderText="Last Name" Margin="0,0,0,10"/>
             <TextBox x:Name="txtEmailAddress" PlaceholderText="Email Address" Margin="0,0,0,10"/>
-            <ComboBox x:Name="cmbDepartment" PlaceholderText="Department" Margin="0,0,0,10">
-                <ComboBoxItem Content="Finance"/>
-                <ComboBoxItem Content="Human Resources"/>
-                <ComboBoxItem Content="Operations"/>
-                <ComboBoxItem Content="Sales"/>
-                <ComboBoxItem Content="Information Technology"/>
-            </ComboBox>
+            <ComboBox x:Name="cmbDepartment" PlaceholderText="Department" Margin="0,0,0,10"/>
             <TextBox x:Name="txtRole" PlaceholderText="Role" Margin="0,0,0,10"/>
             <PasswordBox x:Name="pwdPassword" PlaceholderText="Password" Margin="0,0,0,10"/>
             <Button Content="Register" Click="RegisterButton_Click"/>
