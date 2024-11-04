@@ -17,14 +17,17 @@ namespace ATS.Models
         public DateTime purchaseDate { get; set; }
         public string textNotes { get; set; }
 
-        public Asset(int id, string name, string model, string manufacturer, string type, string ip)
+        public int userId { get; set; } 
+        public Asset(int userId, string name, string model, string manufacturer, string type, string ip, DateTime purchaseDate, string textNotes)
         {
-            this.id = id;
+            this.userId = userId;
             this.name = name;
             this.model = model;
             this.manufacturer = manufacturer;
             this.type = type;
             this.ip = ip;
+            this.purchaseDate = purchaseDate;
+            this.textNotes = textNotes;
         }
 
     }
