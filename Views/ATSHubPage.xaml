@@ -11,6 +11,8 @@
     <Grid>
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="150">
             <Button Content="Asset Registration" Click="AssetRegistrationButton_Click" Margin="0,0,0,10"/>
+            <Button Content="Asset Management" Click="AssetManagementButton_Click" Margin="0,0,0,10"/>
+            <Button Content="Exit" Click="ExitButton_Click" Margin="0,0,0,10"/>
 
         </StackPanel>
     </Grid>

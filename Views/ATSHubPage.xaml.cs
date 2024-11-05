@@ -29,5 +29,14 @@ namespace ATS.Views
             Frame.Navigate(typeof(AssetRegistrationPage));
         }
 
+        private void AssetManagementButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(AssetManagementPage));
+        }
+
+        private void ExitButton_Click(object sender, RoutedEventArgs e)
+        {
+            Application.Current.Exit();
+        }
     }
 }

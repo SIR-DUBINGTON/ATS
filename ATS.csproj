@@ -131,6 +131,9 @@
     <Compile Include="ViewModels\AssetInteractionModule.cs" />
     <Compile Include="ViewModels\DepartmentInteractionModule.cs" />
     <Compile Include="ViewModels\UserInteractionModule.cs" />
+    <Compile Include="Views\AssetManagementPage.xaml.cs">
+      <DependentUpon>AssetManagementPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AssetRegistrationPage.xaml.cs">
       <DependentUpon>AssetRegistrationPage.xaml</DependentUpon>
     </Compile>
@@ -158,6 +161,10 @@
     <Page Include="MainPage.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Views\AssetManagementPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AssetRegistrationPage.xaml">
       <SubType>Designer</SubType>

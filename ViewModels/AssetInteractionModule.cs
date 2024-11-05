@@ -17,39 +17,41 @@ namespace ATS.ViewModels
         {
             _databaseConHub = databaseConHub;
         }
-    
-        public List<Asset> GetAssets()
+
+        public List<Asset> GetAssetsForUser(int userId, string searchTerm = "")
         {
-            List<Asset> assets = new List<Asset>();
+            List<Asset> userAssets = new List<Asset>();
+
+            string query = "SELECT * FROM assets WHERE userId = @userId AND (aname LIKE @searchTerm OR model LIKE @searchTerm)";
 
             using (var connection = _databaseConHub.GetConnection())
             {
-                connection.Open();
-                string query = "SELECT id, name, model, manufacturer, type, ip, purchaseDate, textNotes FROM assets";
-                using (var command = new MySqlCommand(query, connection))
-                {
-                    using (var reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            int id = reader.GetInt32("id");
-                            string name = reader.GetString("name");
-                            string model = reader.GetString("model");
-                            string manufacturer = reader.GetString("manufacturer");
-                            string type = reader.GetString("type");
-                            string ip = reader.GetString("ip");
-                            DateTime purchaseDate = reader.GetDateTime("purchaseDate");
-                            string textNotes = reader.GetString("textNotes");
+                MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@userId", userId);
+                cmd.Parameters.AddWithValue("@searchTerm", $"%{searchTerm}%");
 
-                            Asset asset = new Asset(id, name, model, manufacturer, type, ip, purchaseDate, textNotes);
-                            assets.Add(asset);
-                        }
+                connection.Open();
+                using (var reader = cmd.ExecuteReader())
+                {
+                    while (reader.Read())
+                    {
+                        int id = reader.GetInt32("id");
+                        string name = reader.GetString("aname");
+                        string model = reader.GetString("model");
+                        string manufacturer = reader.GetString("manufacturer");
+                        string type = reader.GetString("atype");
+                        string ip = reader.GetString("ip");
+                        DateTime purchaseDate = reader.GetDateTime("purchaseDate");
+                        string textNotes = reader.GetString("textNote");
+
+                        Asset asset = new Asset(id, name, model, manufacturer, type, ip, purchaseDate, textNotes);
+                        userAssets.Add(asset);
                     }
                 }
             }
-            return assets;
-
+            return userAssets;
         }
+
         public void RegisterAsset(Asset asset)
         {
             using (var connection = _databaseConHub.GetConnection())

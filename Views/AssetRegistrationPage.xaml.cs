@@ -21,6 +21,7 @@ using Windows.UI.Xaml.Media;
 using Windows.UI.Xaml.Navigation;
 using Windows.Networking.Connectivity;
 using Windows.System;
+using Windows.Security.ExchangeActiveSyncProvisioning;
 
 
 namespace ATS.Views
@@ -86,6 +87,7 @@ namespace ATS.Views
             };
 
             _assetInteractionModule.RegisterAsset(asset); 
+            Frame.Navigate(typeof(ATSHubPage));
         }
 
         private int GetLoggedInUserId()
@@ -95,8 +97,12 @@ namespace ATS.Views
 
         private string GetDeviceName()
         {
-            var deviceInfo = AnalyticsInfo.VersionInfo.DeviceFamily;
-            return deviceInfo; 
+            var systemId = Windows.System.Profile.SystemIdentification.GetSystemIdForPublisher();
+            if (systemId != null && systemId.Id != null)
+            {
+                return BitConverter.ToString(systemId.Id.ToArray());
+            }
+            return "Unknown Device";
         }
 
         private string GetDeviceModel()
@@ -108,30 +114,15 @@ namespace ATS.Views
 
         private string GetManufacturer()
         {
-            ProcessorArchitecture architecture = Windows.System.ProcessorArchitecture.X86;
-            architecture = Windows.System.ProcessorArchitecture.X64;
-
-            switch (architecture)
-            {
-                case ProcessorArchitecture.X86:
-                    return "x86";
-                case ProcessorArchitecture.X64:
-                    return "x64";
-                case ProcessorArchitecture.Arm:
-                    return "ARM";
-                case ProcessorArchitecture.Arm64:
-                    return "ARM64";
-                default:
-                    return "Unknown Architecture";
-            }
+            var deviceInfo = new EasClientDeviceInformation();
+            return deviceInfo.SystemManufacturer;
         }
-            
+
         private string GetDeviceType()
         {
             var deviceType = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
             return deviceType;
         }
-
 
         private string GetIPAddress()
         {
