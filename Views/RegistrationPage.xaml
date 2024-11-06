@@ -9,9 +9,12 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <TextBlock Text="Asset Tracking System" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="24"/>
+
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
             <TextBlock Text="User Registration" FontSize="24" Margin="0,0,0,20" HorizontalAlignment="Center"/>
 
+            <!-- Input fields -->
             <TextBox x:Name="txtUsername" PlaceholderText="Username" Margin="0,0,0,10"/>
             <TextBox x:Name="txtFirstName" PlaceholderText="First Name" Margin="0,0,0,10"/>
             <TextBox x:Name="txtLastName" PlaceholderText="Last Name" Margin="0,0,0,10"/>
@@ -19,7 +22,24 @@
             <ComboBox x:Name="cmbDepartment" PlaceholderText="Department" Margin="0,0,0,10"/>
             <TextBox x:Name="txtRole" PlaceholderText="Role" Margin="0,0,0,10"/>
             <PasswordBox x:Name="pwdPassword" PlaceholderText="Password" Margin="0,0,0,10"/>
-            <Button Content="Register" Click="RegisterButton_Click"/>
+
+            <!-- Register button -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="RegisterButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE1E2;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Register" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Back button -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="BackButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE10E;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Back" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Error message -->
             <TextBlock x:Name="txtError" Foreground="Red" Margin="0,10,0,0" Visibility="Collapsed"/>
         </StackPanel>
     </Grid>

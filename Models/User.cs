@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ATS.Models
 {
+    /// <summary>
+    /// This class represents a user in the system.
+    /// </summary>
     public class User
     {
         public int id { get; set; }
@@ -18,7 +21,18 @@ namespace ATS.Models
         public DepartmentName Department { get; set; }
         public string role { get; set; }
         public List<Asset> Assets { get; set; }
-
+        /// <summary>
+        /// Constructor for the User class.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="username"></param>
+        /// <param name="passwordHash"></param>
+        /// <param name="firstName"></param>
+        /// <param name="lastName"></param>
+        /// <param name="emailAddress"></param>
+        /// <param name="department"></param>
+        /// <param name="role"></param>
+        /// <param name="Assets"></param>
         public User(int id, string username, string passwordHash, string firstName, string lastName, string emailAddress, DepartmentName department, string role, List<Asset> Assets)
         {
             this.id = id;

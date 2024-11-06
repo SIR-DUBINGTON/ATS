@@ -7,22 +7,36 @@ using MySqlConnector;
 
 namespace ATS.DataAccess
 {
+    /// <summary>
+    /// This class is in charge of establishing a connection to the database and executing queries
+    /// </summary>
     public class DatabaseConHub
     {
-
+        /// <summary>
+        /// Connection string for the database
+        /// </summary>
         private readonly string connectionString;
 
-
+        /// <summary>
+        /// Constructor for the DatabaseConHub class
+        /// </summary>
         public DatabaseConHub()
         {
             connectionString = "Server=localhost;Database=ats;User ID=root;Password='';";
         }
-
+        /// <summary>
+        ///  Returns a MySqlConnection object for establishing a connection to the database
+        /// </summary>
+        /// <returns>MySqlConnection</returns>
         public MySqlConnection GetConnection()
         {
             return new MySqlConnection(connectionString);
         }
-
+        /// <summary>
+        /// Executes a non-query SQL statement asynchronously and returns a boolean indicating success or failure
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>Boolean</returns>
         public async Task<bool> ExecuteQueryAsync(string query)
         {
             using (var connection = GetConnection())
@@ -43,7 +57,11 @@ namespace ATS.DataAccess
                 }
             }
         }
-
+        /// <summary>
+        /// Executes a SQL query asynchronously and returns a MySqlDataReader for reading the results
+        /// </summary>
+        /// <param name="query"></param>
+        /// <returns>MySqlDataReader</returns>
         public async Task<MySqlDataReader> ExecuteReaderAsync(string query)
         {
             var connection = GetConnection();

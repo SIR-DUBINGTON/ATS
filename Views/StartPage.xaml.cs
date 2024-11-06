@@ -17,43 +17,34 @@ using Windows.UI.Xaml.Navigation;
 namespace ATS.Views
 {
     /// <summary>
-    /// Class for the ATSHubPage
+    /// Class for the StartPage view.
     /// </summary>
-    public sealed partial class ATSHubPage : Page
+    public sealed partial class StartPage : Page
     {
         /// <summary>
-        /// Initializes the ATSHubPage
+        /// Constructor for the StartPage view.
         /// </summary>
-        public ATSHubPage()
+        public StartPage()
         {
             this.InitializeComponent();
         }
         /// <summary>
-        /// Method for the AssetRegistrationButton click event
+        /// Method for the login button click event.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AssetRegistrationButton_Click(object sender, RoutedEventArgs e)
+        private void LoginButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AssetRegistrationPage));
+            Frame.Navigate(typeof(LoginPage));
         }
         /// <summary>
-        /// Method for the AssetManagementButton click event
+        /// Method for the register button click event.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AssetManagementButton_Click(object sender, RoutedEventArgs e)
+        private void RegisterButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AssetManagementPage));
-        }
-        /// <summary>
-        /// Method for the ExitButton click event
-        /// </summary>
-        /// <param name="sender"></param>
-        /// <param name="e"></param>
-        private void ExitButton_Click(object sender, RoutedEventArgs e)
-        {
-            Application.Current.Exit();
+            Frame.Navigate(typeof(RegistrationPage));
         }
     }
 }

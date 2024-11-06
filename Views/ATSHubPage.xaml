@@ -9,11 +9,29 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
-        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="150">
-            <Button Content="Asset Registration" Click="AssetRegistrationButton_Click" Margin="0,0,0,10"/>
-            <Button Content="Asset Management" Click="AssetManagementButton_Click" Margin="0,0,0,10"/>
-            <Button Content="Exit" Click="ExitButton_Click" Margin="0,0,0,10"/>
-
+        <TextBlock Text="Asset Tracking System" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="24"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+            <!-- Button for registration -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="AssetRegistrationButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE088;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Asset Registration" FontSize="24" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <!-- Button for management -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="AssetManagementButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE0F9;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Asset Management" FontSize="24" VerticalAlignment="Center"/>
+                </StackPanel>
+            </Button>
+            <!-- Button to exit the application -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="ExitButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#x2A02;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Exit" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
         </StackPanel>
     </Grid>
 </Page>

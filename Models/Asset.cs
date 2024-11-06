@@ -6,6 +6,9 @@ using System.Threading.Tasks;
 
 namespace ATS.Models
 {
+    /// <summary>
+    /// This class represents an asset in the system.
+    /// </summary>
     public class Asset
     {
         public int id { get; set; }
@@ -17,9 +20,23 @@ namespace ATS.Models
         public DateTime purchaseDate { get; set; }
         public string textNotes { get; set; }
 
-        public int userId { get; set; } 
-        public Asset(int userId, string name, string model, string manufacturer, string type, string ip, DateTime purchaseDate, string textNotes)
+        public int userId { get; set; }
+
+        /// <summary>
+        /// Constructor for the Asset class.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <param name="userId"></param>
+        /// <param name="name"></param>
+        /// <param name="model"></param>
+        /// <param name="manufacturer"></param>
+        /// <param name="type"></param>
+        /// <param name="ip"></param>
+        /// <param name="purchaseDate"></param>
+        /// <param name="textNotes"></param>
+        public Asset(int id, int userId, string name, string model, string manufacturer, string type, string ip, DateTime purchaseDate, string textNotes)
         {
+            this.id = id;
             this.userId = userId;
             this.name = name;
             this.model = model;

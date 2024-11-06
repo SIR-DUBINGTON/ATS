@@ -9,15 +9,28 @@ using ATS.Models;
 
 namespace ATS.ViewModels
 {
+    /// <summary>
+    /// This class is in charge of handling interactions with the department table in the database
+    /// </summary>
     public class DepartmentInteractionModule
     {
+        /// <summary>
+        /// Instance of the DatabaseConHub class
+        /// </summary>
         private readonly DatabaseConHub _databaseConHub;
-
+        /// <summary>
+        /// Initializes the DepartmentInteractionModule class
+        /// </summary>
+        /// <param name="databaseConHub"></param>
         public DepartmentInteractionModule(DatabaseConHub databaseConHub)
         {
             _databaseConHub = databaseConHub;
         }
-
+        /// <summary>
+        /// Method to get the department ID from the department name
+        /// </summary>
+        /// <param name="departmentName"></param>
+        /// <returns>departmentID</returns>
         public int GetDepartmentID(string departmentName)
         {
             int departmentID = -1;
@@ -40,7 +53,10 @@ namespace ATS.ViewModels
 
             return departmentID;
         }
-
+        /// <summary>
+        /// Method to get all departments from the database
+        /// </summary>
+        /// <returns>departments</returns>
         public List<Department> GetAllDepartments()
         {
             List<Department> departments = new List<Department>();

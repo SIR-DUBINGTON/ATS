@@ -1,0 +1,33 @@
+﻿<Page
+    x:Class="ATS.Views.StartPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ATS.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock Text="Asset Tracking System" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="24"/>
+
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+            <!-- Login button -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="LoginButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE156;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Login" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+
+            <!-- Register button -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="RegisterButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE1E2;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Register" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+        </StackPanel>
+
+    </Grid>
+</Page>

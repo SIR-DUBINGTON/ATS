@@ -1,0 +1,36 @@
+﻿<Page
+    x:Class="ATS.Views.LoginPage"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:local="using:ATS.Views"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d"
+    Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
+
+    <Grid>
+        <TextBlock Text="Asset Tracking System" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="24"/>
+        <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
+            <TextBlock Text="Login Details" FontSize="24" Margin="0,0,0,20" HorizontalAlignment="Center"/>
+            <!-- Textbox for login username -->
+            <TextBox x:Name="UsernameTextBox" PlaceholderText="Username" Margin="0,0,0,10"/>
+            <PasswordBox x:Name="PasswordBox" PlaceholderText="Password" Margin="0,0,0,20"/>
+            <!-- Button for login -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="LoginButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE156;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Login" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <!-- Button for going back -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="BackButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE10E;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Back" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <!-- Error message for failed login -->
+            <TextBlock x:Name="ErrorTextBlock" Foreground="Red" TextAlignment="Center" Margin="0,10,0,0"/>
+        </StackPanel>
+    </Grid>
+</Page>

@@ -26,43 +26,74 @@ using Windows.Security.ExchangeActiveSyncProvisioning;
 
 namespace ATS.Views
 {
-
+    /// <summary>
+    /// Class that represents the Asset Registration Page.
+    /// </summary>
     public sealed partial class AssetRegistrationPage : Page
     {
+        /// <summary>
+        /// Instance of the AssetInteractionModule class.
+        /// </summary>
         private readonly AssetInteractionModule _assetInteractionModule;
-        private DatabaseConHub dbConHub = new DatabaseConHub();
-
+        private DatabaseConHub _databaseConHub = new DatabaseConHub();
+        /// <summary>
+        /// Constructor for the AssetRegistrationPage class.
+        /// </summary>
         public AssetRegistrationPage()
         {
             this.InitializeComponent();
             _assetInteractionModule = new AssetInteractionModule(new DatabaseConHub());
         }
-
+        /// <summary>
+        /// Method that navigates back to the previous page.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BackButton_Click(object sender, RoutedEventArgs e)
         {
             Frame.GoBack();
         }
-
+        /// <summary>
+        /// Method that shows the notes text box when the checkbox is checked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChkAddNotes_Checked(object sender, RoutedEventArgs e)
         {
             txtNotes.Visibility = Visibility.Visible;
         }
-
+        /// <summary>
+        /// Method that hides the notes text box when the checkbox is unchecked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChkAddNotes_Unchecked(object sender, RoutedEventArgs e)
         {
             txtNotes.Visibility = Visibility.Collapsed;
         }
-
+        /// <summary>
+        /// Method that shows the purchase date date picker when the checkbox is checked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChkAddPurchaseDate_Checked(object sender, RoutedEventArgs e)
         {
             dpPurchaseDate.Visibility = Visibility.Visible;
         }
-
+        /// <summary>
+        /// Method that hides the purchase date date picker when the checkbox is unchecked.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ChkAddPurchaseDate_Unchecked(object sender, RoutedEventArgs e)
         {
             dpPurchaseDate.Visibility = Visibility.Collapsed;
         }
-
+        /// <summary>
+        /// Method that registers an asset in the system.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void RegisterAssetButton_Click(object sender, RoutedEventArgs e)
         {
             string deviceName = GetDeviceName();
@@ -75,7 +106,7 @@ namespace ATS.Views
                                     ? dpPurchaseDate.SelectedDate.Value.DateTime
                                     : DateTime.Now;
 
-            var asset = new Asset(SessionManager.Instance.UserId, deviceName, deviceModel, manufacturer, type, ipAddress, purchaseDate, notes)
+            var asset = new Asset(0, SessionManager.Instance.UserId, deviceName, deviceModel, manufacturer, type, ipAddress, purchaseDate, notes)
             {
                 name = deviceName,
                 model = deviceModel,
@@ -89,12 +120,18 @@ namespace ATS.Views
             _assetInteractionModule.RegisterAsset(asset); 
             Frame.Navigate(typeof(ATSHubPage));
         }
-
+        /// <summary>
+        /// Method that gets the logged in user's id.
+        /// </summary>
+        /// <returns>return SessionManager.Instance.UserId</returns>
         private int GetLoggedInUserId()
         {
             return SessionManager.Instance.UserId;
         }
-
+        /// <summary>
+        /// Method that generates the device name.
+        /// </summary>
+        /// <returns>BitConverter.ToString(systemId.Id.ToArray())</returns>
         private string GetDeviceName()
         {
             var systemId = Windows.System.Profile.SystemIdentification.GetSystemIdForPublisher();
@@ -104,26 +141,38 @@ namespace ATS.Views
             }
             return "Unknown Device";
         }
-
+        /// <summary>
+        /// Method that generates the device model.
+        /// </summary>
+        /// <returns>deviceFamily and deviceName</returns>
         private string GetDeviceModel()
         {
             var deviceFamily = AnalyticsInfo.VersionInfo.DeviceFamily;
             var deviceName = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamilyVersion;
             return $"{deviceFamily} {deviceName}";
         }
-
+        /// <summary>
+        /// Method that generates the manufacturer of the device.
+        /// </summary>
+        /// <returns>deviceInfo.SystemManufacturer</returns>
         private string GetManufacturer()
         {
             var deviceInfo = new EasClientDeviceInformation();
             return deviceInfo.SystemManufacturer;
         }
-
+        /// <summary>
+        /// Method that generates the type of the device.
+        /// </summary>
+        /// <returns>deviceType</returns>
         private string GetDeviceType()
         {
             var deviceType = Windows.System.Profile.AnalyticsInfo.VersionInfo.DeviceFamily;
             return deviceType;
         }
-
+        /// <summary>
+        /// Method that generates the IP address of the device.
+        /// </summary>
+        /// <returns>hostName.CanonicalName</returns>
         private string GetIPAddress()
         {
             var hostNames = Windows.Networking.Connectivity.NetworkInformation.GetHostNames();

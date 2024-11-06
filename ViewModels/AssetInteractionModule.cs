@@ -6,18 +6,36 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using MySqlConnector;
+using Windows.UI.Popups;
+using Windows.UI.Xaml.Controls;
+using Windows.UI.Xaml;
+
 
 namespace ATS.ViewModels
 {
+    /// <summary>
+    /// Class that handles the assets interaction in the system.
+    /// </summary>
     public class AssetInteractionModule
     {
+        /// <summary>
+        /// Instance of the DatabaseConHub class.
+        /// </summary>
         private readonly DatabaseConHub _databaseConHub;
-
+        /// <summary>
+        /// Initializes a new instance of the AssetInteractionModule class.
+        /// </summary>
+        /// <param name="databaseConHub"></param>
         public AssetInteractionModule(DatabaseConHub databaseConHub)
         {
             _databaseConHub = databaseConHub;
         }
-
+        /// <summary>
+        /// Method that gets the assets for a specific user.
+        /// </summary>
+        /// <param name="userId"></param>
+        /// <param name="searchTerm"></param>
+        /// <returns>userAssets</returns>
         public List<Asset> GetAssetsForUser(int userId, string searchTerm = "")
         {
             List<Asset> userAssets = new List<Asset>();
@@ -44,14 +62,17 @@ namespace ATS.ViewModels
                         DateTime purchaseDate = reader.GetDateTime("purchaseDate");
                         string textNotes = reader.GetString("textNote");
 
-                        Asset asset = new Asset(id, name, model, manufacturer, type, ip, purchaseDate, textNotes);
+                        Asset asset = new Asset(id, userId, name, model, manufacturer, type, ip, purchaseDate, textNotes);
                         userAssets.Add(asset);
                     }
                 }
             }
             return userAssets;
         }
-
+        /// <summary>
+        /// Method that registers an asset in the system.
+        /// </summary>
+        /// <param name="asset"></param>
         public void RegisterAsset(Asset asset)
         {
             using (var connection = _databaseConHub.GetConnection())
@@ -70,6 +91,46 @@ namespace ATS.ViewModels
                     command.Parameters.AddWithValue("@ip", asset.ip);
                     command.Parameters.AddWithValue("@purchaseDate", asset.purchaseDate);
                     command.Parameters.AddWithValue("@textNote", asset.textNotes);
+
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        /// <summary>
+        /// Method that deletes an asset from the system.
+        /// </summary>
+        /// <param name="assetId"></param>
+        public void DeleteAsset(int assetId)
+        {
+            using (var connection = _databaseConHub.GetConnection())
+            {
+                connection.Open();
+                string query = "DELETE FROM Assets WHERE id = @assetId";
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@assetId", assetId);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
+        /// <summary>
+        /// Method that updates the details of an asset in the system.
+        /// </summary>
+        /// <param name="assetId"></param>
+        /// <param name="purchaseDate"></param>
+        /// <param name="textNotes"></param>
+        public void UpdateAssetDetails(int assetId, DateTime purchaseDate, string textNotes)
+        {
+            using (var connection = _databaseConHub.GetConnection())
+            {
+                connection.Open();
+                string query = "UPDATE assets SET purchaseDate = @purchaseDate, textNote = @textNote WHERE id = @assetId";
+
+                using (var command = new MySqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@purchaseDate", purchaseDate);
+                    command.Parameters.AddWithValue("@textNote", textNotes);
+                    command.Parameters.AddWithValue("@assetId", assetId);
 
                     command.ExecuteNonQuery();
                 }

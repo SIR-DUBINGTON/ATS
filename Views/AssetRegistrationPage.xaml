@@ -9,18 +9,33 @@
     Background="{ThemeResource ApplicationPageBackgroundThemeBrush}">
 
     <Grid>
+        <TextBlock Text="Asset Tracking System" HorizontalAlignment="Center" VerticalAlignment="Top" Margin="0,10,0,0" FontSize="24"/>
+        
         <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center" Width="300">
             <TextBlock Text="Asset Registration" FontSize="24" Margin="0,0,0,20" HorizontalAlignment="Center"/>
-
-            <CheckBox x:Name="chkAddNotes" Content="Add notes?" Margin="0,0,0,10" Checked="ChkAddNotes_Checked" Unchecked="ChkAddNotes_Unchecked"/>
+             <!-- This is a check button to add notes -->
+            <CheckBox x:Name="chkAddNotes" Content="Add notes?" Margin="0,0,0,10" Checked="ChkAddNotes_Checked" Unchecked="ChkAddNotes_Unchecked" HorizontalAlignment="Center" FontSize="24"/>
+            <!-- Textbox for notes -->
             <TextBox x:Name="txtNotes" PlaceholderText="Optional Notes" Margin="0,0,0,10" Visibility="Collapsed"/>
-
-            <CheckBox x:Name="chkAddPurchaseDate" Content="Add purchase date?" Margin="0,0,0,10" Checked="ChkAddPurchaseDate_Checked" Unchecked="ChkAddPurchaseDate_Unchecked"/>
+            <!-- This is a check button to add a purchase date -->
+            <CheckBox x:Name="chkAddPurchaseDate" Content="Add purchase date?" Margin="0,0,0,10" Checked="ChkAddPurchaseDate_Checked" Unchecked="ChkAddPurchaseDate_Unchecked" HorizontalAlignment="Center" FontSize="24"/>
+            <!-- Datebox for picking purchase date -->
             <DatePicker x:Name="dpPurchaseDate" Margin="0,0,0,10" Visibility="Collapsed"/>
-
-            <Button Content="Register Asset" Click="RegisterAssetButton_Click"/>
+            <!-- Register Button -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="RegisterAssetButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE1E2;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Register" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
+            <!-- Back Button -->
+            <Button FontFamily="Segoe UI Symbol" FontSize="24" HorizontalAlignment="Center" Margin="0,10,0,0" Click="BackButton_Click">
+                <StackPanel Orientation="Horizontal">
+                    <TextBlock Text="&#xE10E;" FontSize="24" VerticalAlignment="Center"/>
+                    <TextBlock Text=" Back" FontSize="24" VerticalAlignment="Center" Margin="10,0,0,0"/>
+                </StackPanel>
+            </Button>
             <TextBlock x:Name="txtError" Foreground="Red" Margin="0,10,0,0" Visibility="Collapsed"/>
-            <Button Content="Back" Click="BackButton_Click"/>
         </StackPanel>
     </Grid>
 </Page>
