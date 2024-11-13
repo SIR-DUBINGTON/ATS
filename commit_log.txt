@@ -1,0 +1,59 @@
+commit 4c9a21fafd07cd9a1f6ebe56dba0e1729a6ac3b6
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Wed Nov 6 05:01:53 2024 +0100
+
+    Full CRUD Functionality Added. Prototype Complete.
+
+commit 0ebf0e5055f3a96a2b4b398874d5b0ec86e2680e
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Tue Nov 5 03:15:20 2024 +0100
+
+    Asset Management Search Feature Implemented.
+
+commit c16e98565860295b52805080e4c030251d00d763
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Mon Nov 4 23:06:14 2024 +0100
+
+    Asset Info Query Added. Session Manager Implemented.
+
+commit bd49de245ea30ea7a69e7f787ab45a8a47a07c45
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Sun Nov 3 04:44:50 2024 +0100
+
+    Department ID Fix.
+
+commit c1838acb1a46728d33f0aab60858dbebf9e5f5b9
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Sat Nov 2 23:59:45 2024 +0100
+
+    User Info Registration Query Added.
+
+commit 72733ad8850522b0920c2f9b80f8be503b753b06
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Thu Oct 31 16:21:45 2024 +0100
+
+    Enum Set Up Appropriately For Departments. Minor Cleanup.
+
+commit 41eb752bc1044b51712ed73dc2e8393c82da2737
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Thu Oct 31 01:05:17 2024 +0100
+
+    Tracker Removed. Deemed Clutter. MVVM Pattern Established.
+
+commit bfee5e33744ee26212c389871fc84cca3dfb2991
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Wed Oct 30 22:50:11 2024 +0100
+
+    Project Initiation. Models Created.
+
+commit 17f4a1def53c1d45e8de0090bc7573d8c2bce83f
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Wed Oct 30 22:18:35 2024 +0100
+
+    Add project files.
+
+commit 572f703c76a18d13cae3aab2a8bd393b2bc4d417
+Author: Eoin Smith <eoin-smith@hotmail.com>
+Date:   Wed Oct 30 22:18:32 2024 +0100
+
+    Add .gitattributes and .gitignore.

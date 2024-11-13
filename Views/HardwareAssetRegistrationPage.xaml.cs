@@ -29,20 +29,20 @@ namespace ATS.Views
     /// <summary>
     /// Class that represents the Asset Registration Page.
     /// </summary>
-    public sealed partial class AssetRegistrationPage : Page
+    public sealed partial class HardwareAssetRegistrationPage : Page
     {
         /// <summary>
         /// Instance of the AssetInteractionModule class.
         /// </summary>
-        private readonly AssetInteractionModule _assetInteractionModule;
+        private readonly HardwareAssetInteractionModule _assetInteractionModule;
         private DatabaseConHub _databaseConHub = new DatabaseConHub();
         /// <summary>
         /// Constructor for the AssetRegistrationPage class.
         /// </summary>
-        public AssetRegistrationPage()
+        public HardwareAssetRegistrationPage()
         {
             this.InitializeComponent();
-            _assetInteractionModule = new AssetInteractionModule(new DatabaseConHub());
+            _assetInteractionModule = new HardwareAssetInteractionModule(new DatabaseConHub());
         }
         /// <summary>
         /// Method that navigates back to the previous page.
@@ -106,7 +106,7 @@ namespace ATS.Views
                                     ? dpPurchaseDate.SelectedDate.Value.DateTime
                                     : DateTime.Now;
 
-            var asset = new Asset(0, SessionManager.Instance.UserId, deviceName, deviceModel, manufacturer, type, ipAddress, purchaseDate, notes)
+            var asset = new HardwareAsset(0, SessionManager.Instance.UserId, deviceName, deviceModel, manufacturer, type, ipAddress, purchaseDate, notes)
             {
                 name = deviceName,
                 model = deviceModel,

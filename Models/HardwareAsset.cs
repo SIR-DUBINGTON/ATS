@@ -3,13 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Xml.Linq;
 
 namespace ATS.Models
 {
     /// <summary>
     /// This class represents an asset in the system.
     /// </summary>
-    public class Asset
+    public class HardwareAsset
     {
         public int id { get; set; }
         public string name { get; set; }
@@ -21,6 +22,11 @@ namespace ATS.Models
         public string textNotes { get; set; }
 
         public int userId { get; set; }
+
+        ///public override string ToString()
+        ///{
+        /// return $"{name} - {model} - {manufacturer} - {type} - {ip} - {purchaseDate} - {textNotes}";
+        ///}
 
         /// <summary>
         /// Constructor for the Asset class.
@@ -34,7 +40,7 @@ namespace ATS.Models
         /// <param name="ip"></param>
         /// <param name="purchaseDate"></param>
         /// <param name="textNotes"></param>
-        public Asset(int id, int userId, string name, string model, string manufacturer, string type, string ip, DateTime purchaseDate, string textNotes)
+        public HardwareAsset(int id, int userId, string name, string model, string manufacturer, string type, string ip, DateTime purchaseDate, string textNotes)
         {
             this.id = id;
             this.userId = userId;

@@ -124,19 +124,22 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Asset.cs" />
+    <Compile Include="Models\HardwareAsset.cs" />
     <Compile Include="Models\Department.cs" />
+    <Compile Include="Models\HardwareSoftwareLinks.cs" />
     <Compile Include="Models\SessionManager.cs" />
+    <Compile Include="Models\SoftwareAsset.cs" />
     <Compile Include="Models\User.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ViewModels\AssetInteractionModule.cs" />
+    <Compile Include="ViewModels\HardwareAssetInteractionModule.cs" />
     <Compile Include="ViewModels\DepartmentInteractionModule.cs" />
+    <Compile Include="ViewModels\SoftwareAssetInteractionModule.cs" />
     <Compile Include="ViewModels\UserInteractionModule.cs" />
     <Compile Include="Views\AssetManagementPage.xaml.cs">
       <DependentUpon>AssetManagementPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Views\AssetRegistrationPage.xaml.cs">
-      <DependentUpon>AssetRegistrationPage.xaml</DependentUpon>
+    <Compile Include="Views\HardwareAssetRegistrationPage.xaml.cs">
+      <DependentUpon>HardwareAssetRegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ATSHubPage.xaml.cs">
       <DependentUpon>ATSHubPage.xaml</DependentUpon>
@@ -146,6 +149,9 @@
     </Compile>
     <Compile Include="Views\RegistrationPage.xaml.cs">
       <DependentUpon>RegistrationPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\SoftwareAssetRegistrationPage.xaml.cs">
+      <DependentUpon>SoftwareAssetRegistrationPage.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\StartPage.xaml.cs">
       <DependentUpon>StartPage.xaml</DependentUpon>
@@ -173,7 +179,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AssetRegistrationPage.xaml">
+    <Page Include="Views\HardwareAssetRegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -186,6 +192,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\RegistrationPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\SoftwareAssetRegistrationPage.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

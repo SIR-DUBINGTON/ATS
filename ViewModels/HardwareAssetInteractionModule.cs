@@ -16,7 +16,7 @@ namespace ATS.ViewModels
     /// <summary>
     /// Class that handles the assets interaction in the system.
     /// </summary>
-    public class AssetInteractionModule
+    public class HardwareAssetInteractionModule
     {
         /// <summary>
         /// Instance of the DatabaseConHub class.
@@ -26,7 +26,7 @@ namespace ATS.ViewModels
         /// Initializes a new instance of the AssetInteractionModule class.
         /// </summary>
         /// <param name="databaseConHub"></param>
-        public AssetInteractionModule(DatabaseConHub databaseConHub)
+        public HardwareAssetInteractionModule(DatabaseConHub databaseConHub)
         {
             _databaseConHub = databaseConHub;
         }
@@ -36,11 +36,11 @@ namespace ATS.ViewModels
         /// <param name="userId"></param>
         /// <param name="searchTerm"></param>
         /// <returns>userAssets</returns>
-        public List<Asset> GetAssetsForUser(int userId, string searchTerm = "")
+        public List<HardwareAsset> GetAssetsForUser(int userId, string searchTerm = "")
         {
-            List<Asset> userAssets = new List<Asset>();
+            List<HardwareAsset> userAssets = new List<HardwareAsset>();
 
-            string query = "SELECT * FROM assets WHERE userId = @userId AND (aname LIKE @searchTerm OR model LIKE @searchTerm)";
+            string query = "SELECT * FROM HardwareAssets WHERE userId = @userId AND (aname LIKE @searchTerm OR model LIKE @searchTerm)";
 
             using (var connection = _databaseConHub.GetConnection())
             {
@@ -62,7 +62,7 @@ namespace ATS.ViewModels
                         DateTime purchaseDate = reader.GetDateTime("purchaseDate");
                         string textNotes = reader.GetString("textNote");
 
-                        Asset asset = new Asset(id, userId, name, model, manufacturer, type, ip, purchaseDate, textNotes);
+                        HardwareAsset asset = new HardwareAsset(id, userId, name, model, manufacturer, type, ip, purchaseDate, textNotes);
                         userAssets.Add(asset);
                     }
                 }
@@ -73,13 +73,13 @@ namespace ATS.ViewModels
         /// Method that registers an asset in the system.
         /// </summary>
         /// <param name="asset"></param>
-        public void RegisterAsset(Asset asset)
+        public void RegisterAsset(HardwareAsset asset)
         {
             using (var connection = _databaseConHub.GetConnection())
             {
                 connection.Open();
-                string query = @"INSERT INTO assets (userId, aname, model, manufacturer, atype, ip, purchaseDate, textNote) 
-                         VALUES (@userId, @aname, @model, @manufacturer, @atype, @ip, @purchaseDate, @textNote)";
+                string query = @"INSERT INTO HardwareAssets (userId, aname, model, manufacturer, atype, ip, purchaseDate, textNote) 
+                             VALUES (@userId, @aname, @model, @manufacturer, @atype, @ip, @purchaseDate, @textNote)";
 
                 using (var command = new MySqlCommand(query, connection))
                 {
@@ -105,7 +105,7 @@ namespace ATS.ViewModels
             using (var connection = _databaseConHub.GetConnection())
             {
                 connection.Open();
-                string query = "DELETE FROM Assets WHERE id = @assetId";
+                string query = "DELETE FROM HardwareAssets WHERE id = @assetId";
                 using (var command = new MySqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@assetId", assetId);
@@ -124,7 +124,7 @@ namespace ATS.ViewModels
             using (var connection = _databaseConHub.GetConnection())
             {
                 connection.Open();
-                string query = "UPDATE assets SET purchaseDate = @purchaseDate, textNote = @textNote WHERE id = @assetId";
+                string query = "UPDATE HardwareAssets SET purchaseDate = @purchaseDate, textNote = @textNote WHERE id = @assetId";
 
                 using (var command = new MySqlCommand(query, connection))
                 {

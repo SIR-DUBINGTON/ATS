@@ -33,9 +33,9 @@ namespace ATS.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void AssetRegistrationButton_Click(object sender, RoutedEventArgs e)
+        private void HardwareAssetRegistrationButton_Click(object sender, RoutedEventArgs e)
         {
-            Frame.Navigate(typeof(AssetRegistrationPage));
+            Frame.Navigate(typeof(HardwareAssetRegistrationPage));
         }
         /// <summary>
         /// Method for the AssetManagementButton click event
@@ -51,6 +51,11 @@ namespace ATS.Views
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
+        
+        private void SoftwareAssetRegistrationButton_Click(object sender, RoutedEventArgs e)
+        {
+            Frame.Navigate(typeof(SoftwareAssetRegistrationPage));
+        }
         private void ExitButton_Click(object sender, RoutedEventArgs e)
         {
             Application.Current.Exit();

@@ -20,7 +20,7 @@ namespace ATS.Models
         public string department { get; set; }
         public DepartmentName Department { get; set; }
         public string role { get; set; }
-        public List<Asset> Assets { get; set; }
+        public List<HardwareAsset> Assets { get; set; }
         /// <summary>
         /// Constructor for the User class.
         /// </summary>
@@ -33,7 +33,7 @@ namespace ATS.Models
         /// <param name="department"></param>
         /// <param name="role"></param>
         /// <param name="Assets"></param>
-        public User(int id, string username, string passwordHash, string firstName, string lastName, string emailAddress, DepartmentName department, string role, List<Asset> Assets)
+        public User(int id, string username, string passwordHash, string firstName, string lastName, string emailAddress, DepartmentName department, string role, List<HardwareAsset> Assets)
         {
             this.id = id;
             this.username = username;
