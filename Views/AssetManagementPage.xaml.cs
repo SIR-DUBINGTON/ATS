@@ -221,7 +221,6 @@ namespace ATS.Views
 
             var stackPanel = new StackPanel();
 
-            // Purchase Date input
             var datePicker = new DatePicker
             {
                 Date = asset.purchaseDate
@@ -229,7 +228,6 @@ namespace ATS.Views
             stackPanel.Children.Add(new TextBlock { Text = "Purchase Date" });
             stackPanel.Children.Add(datePicker);
 
-            // Text Notes input
             var notesBox = new TextBox
             {
                 Text = asset.textNotes,
@@ -287,7 +285,6 @@ namespace ATS.Views
 
             var stackPanel = new StackPanel();
 
-            // OS Name input
             var osNameBox = new TextBox
             {
                 Text = asset.osName,
@@ -296,7 +293,6 @@ namespace ATS.Views
             stackPanel.Children.Add(new TextBlock { Text = "OS Name" });
             stackPanel.Children.Add(osNameBox);
 
-            // OS Version input
             var osVersionBox = new TextBox
             {
                 Text = asset.osVersion,
@@ -305,7 +301,6 @@ namespace ATS.Views
             stackPanel.Children.Add(new TextBlock { Text = "OS Version" });
             stackPanel.Children.Add(osVersionBox);
 
-            // Manufacturer input
             var manufacturerBox = new TextBox
             {
                 Text = asset.manufacturer,
@@ -320,7 +315,6 @@ namespace ATS.Views
 
             if (result == ContentDialogResult.Primary)
             {
-                // Update the asset properties with the new values
                 asset.osName = osNameBox.Text;
                 asset.osVersion = osVersionBox.Text;
                 asset.manufacturer = manufacturerBox.Text;
