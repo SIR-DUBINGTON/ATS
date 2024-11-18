@@ -23,12 +23,12 @@ namespace ATS.ViewModels
         {
             List<SoftwareAsset> userAssets = new List<SoftwareAsset>();
 
-            string query = "SELECT * FROM SoftwareAssets WHERE (osName LIKE @searchTerm OR osVersion LIKE @searchTerm OR manufacturer LIKE @searchTerm)";
+            string query = "SELECT * FROM SoftwareAssets WHERE userId = @userId AND (osName LIKE @searchTerm OR osVersion LIKE @searchTerm OR manufacturer LIKE @searchTerm)";
 
             using (var connection = _databaseConHub.GetConnection())
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
-                cmd.Parameters.AddWithValue("@id", userId);
+                cmd.Parameters.AddWithValue("@userId", userId);
                 cmd.Parameters.AddWithValue("@searchTerm", $"%{searchTerm}%");
 
                 connection.Open();
@@ -41,7 +41,7 @@ namespace ATS.ViewModels
                         string osVersion = reader.GetString("osVersion");
                         string manufacturer = reader.GetString("manufacturer");
 
-                        SoftwareAsset softwareAsset = new SoftwareAsset(id, osName, osVersion, manufacturer);
+                        SoftwareAsset softwareAsset = new SoftwareAsset(id, userId, osName, osVersion, manufacturer);
                         userAssets.Add(softwareAsset);
                     }
                 }
@@ -51,12 +51,13 @@ namespace ATS.ViewModels
 
         public bool RegisterSoftwareAsset(SoftwareAsset softwareAsset)
         {
-            string query = @"INSERT INTO SoftwareAssets (id, osName, osVersion, manufacturer) 
-                     VALUES (@id, @osName, @osVersion, @manufacturer)";
+            string query = @"INSERT INTO SoftwareAssets (id, userId, osName, osVersion, manufacturer) 
+                     VALUES (@id, @userId, @osName, @osVersion, @manufacturer)";
 
             using (var connection = _databaseConHub.GetConnection())
             {
                 MySqlCommand cmd = new MySqlCommand(query, connection);
+                cmd.Parameters.AddWithValue("@userId", softwareAsset.userId);
                 cmd.Parameters.AddWithValue("@id", softwareAsset.id);
                 cmd.Parameters.AddWithValue("@osName", softwareAsset.osName);
                 cmd.Parameters.AddWithValue("@osVersion", softwareAsset.osVersion);

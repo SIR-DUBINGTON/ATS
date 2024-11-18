@@ -12,15 +12,17 @@ namespace ATS.Models
         public string osName { get; set; }
         public string osVersion { get; set; }
         public string manufacturer { get; set; }
+        public int userId { get; set; }
 
 
-        public SoftwareAsset(int id, string osName, string osVersion, string manufacturer)
+
+        public SoftwareAsset(int id, int userId, string osName, string osVersion, string manufacturer)
         {
             this.id = id;
             this.osName = osName;
             this.osVersion = osVersion;
             this.manufacturer = manufacturer;
-
+            this.userId = userId;
         }
     }
 }

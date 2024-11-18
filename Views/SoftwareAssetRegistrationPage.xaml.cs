@@ -59,7 +59,7 @@ namespace ATS.Views
 
             // Assuming user ID is retrieved from the session or current login
             int userId = SessionManager.Instance.UserId;
-            SoftwareAsset softwareAsset = new SoftwareAsset(0, osName, osVersion, manufacturer);
+            SoftwareAsset softwareAsset = new SoftwareAsset(0, SessionManager.Instance.UserId, osName, osVersion, manufacturer);
 
             // Register software asset using SoftwareAssetInteractionModule
             bool isRegistered = _softwareAssetInteractionModule.RegisterSoftwareAsset(softwareAsset);
