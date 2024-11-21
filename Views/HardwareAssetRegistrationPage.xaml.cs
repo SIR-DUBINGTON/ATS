@@ -98,7 +98,7 @@ namespace ATS.Views
         {
             string deviceName = GetDeviceName();
             string deviceModel = GetDeviceModel();
-            string manufacturer = GetManufacturer(); 
+            string manufacturer = GetManufacturer();
             string type = GetDeviceType();
             string ipAddress = GetIPAddress();
             string notes = chkAddNotes.IsChecked == true ? txtNotes.Text : string.Empty;
@@ -117,7 +117,7 @@ namespace ATS.Views
                 textNotes = notes
             };
 
-            _assetInteractionModule.RegisterAsset(asset); 
+            _assetInteractionModule.RegisterAsset(asset);
             Frame.Navigate(typeof(ATSHubPage));
         }
         /// <summary>
@@ -131,15 +131,11 @@ namespace ATS.Views
         /// <summary>
         /// Method that generates the device name.
         /// </summary>
-        /// <returns>BitConverter.ToString(systemId.Id.ToArray())</returns>
+        /// <returns>systemId.FriendlyName</returns>
         private string GetDeviceName()
         {
-            var systemId = Windows.System.Profile.SystemIdentification.GetSystemIdForPublisher();
-            if (systemId != null && systemId.Id != null)
-            {
-                return BitConverter.ToString(systemId.Id.ToArray());
-            }
-            return "Unknown Device";
+            var systemId = new EasClientDeviceInformation();
+            return systemId.FriendlyName;
         }
         /// <summary>
         /// Method that generates the device model.
@@ -180,7 +176,7 @@ namespace ATS.Views
             {
                 if (hostName.IPInformation != null)
                 {
-                    return hostName.CanonicalName; 
+                    return hostName.CanonicalName;
                 }
             }
             return "IP Address not found";
